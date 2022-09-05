@@ -7,6 +7,8 @@ router.post('/authors', authorController.createAuthor)
 
 router.post('/blogs', blogsController.createBlogs)
 
+router.get('/getblogs', blogsController.getBlogs)
+
 
 
 

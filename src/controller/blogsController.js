@@ -24,4 +24,16 @@ const createBlogs = async function (req, res) {
     }
 }
 
+
+const getBlogs = async function(req, res){
+    let data = req.query
+
+    let getData = await blogsModel.find({$and: [{isDeleted:false},{isPublished:true},data]}).populate('authorId')
+    if(getData.length===0){
+        res.status(404).send({ status: false, msg: "page not found" })
+    }
+    res.status(200).send({ status:true, data: getData })
+}
+
 module.exports.createBlogs = createBlogs
+module.exports.getBlogs = getBlogs
