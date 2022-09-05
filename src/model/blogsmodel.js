@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+
 const ObjectId = mongoose.Schema.Types.ObjectId
 
 const blogSchema = new mongoose.Schema({
@@ -12,7 +14,7 @@ const blogSchema = new mongoose.Schema({
     },
     authorId: {
         type: ObjectId,
-        ref: author,
+        ref: 'author',
         required: true
     },
     tags: [{
@@ -30,15 +32,17 @@ const blogSchema = new mongoose.Schema({
         default: false
     },
     deletedAt: {
-        type: Date
+        type: Date,
+        default: Date.now,
     },
     publishedAt: {
-        type: Date
+        type: Date,
+        default: Date.now,
     },
     isPublished: {
         type: Boolean,
         default: false
     }
-}, { timeStamps: true })
+}, { timestamps: true })
 
 module.exports = mongoose.model('blog', blogSchema)
